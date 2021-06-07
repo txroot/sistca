@@ -1,0 +1,14 @@
+Cloning the repo:
+git clone https://github.com/txroot/sistca.git
+
+Run in the bash (Linux/Terminal or Windows/Powershell):
+cd ./sistca/help_files
+docker-compose up
+
+Access PhpMyadmin via browser through the address:
+http://localhost:8080
+
+If necessary, access the shell of the MySql docker container using the following command:
+docker exec -it mysql sh
+
+Look at docker-compose.yml file to obtain more details (root password and other info)

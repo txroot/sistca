@@ -1,0 +1,42 @@
+version: '3.0'
+services:
+
+  mysql-server:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    volumes:
+      - ./data-mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - isep_sistca
+
+  phpmyadmin:
+    depends_on:
+      - mysql-server
+    image: phpmyadmin/phpmyadmin:5.0.1
+    restart: always
+    environment:
+      PMA_HOST: mysql-server
+      PMA_USER: root
+      PMA_PASSWORD: secret
+    ports:
+      - "8080:80"
+    networks:
+      - isep_sistca
+
+volumes:
+  data:
+  data-mysql:
+
+networks:
+  isep_sistca:
+    ipam:
+      driver: default
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: isep_sistca
